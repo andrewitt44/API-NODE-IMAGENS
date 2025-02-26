@@ -1,11 +1,3 @@
-//npm init -y
-//npm install express
-//node index.js
-//npm install nodemon
-//npm install mysql2
-//npm install knex
-//npm install cors
-
 const express = require('express'); 
 const cors = require('cors');
  
