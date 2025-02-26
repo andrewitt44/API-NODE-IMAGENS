@@ -4,10 +4,13 @@ const database = require('../database/connection')
 class ImagemRepository {
     async criarImagem(imagem) {
         try {
-            await database('imagem').insert(imagem);
+            await database('imagem').insert({
+                referencia: imagem.referencia,
+                usuario_id: imagem.usuario_id,  // Remover data de criação
+            });
             return { message: "Imagem criada com sucesso" };
         } catch (error) {
-            throw new Error("Erro ao inserir imagem no banco de dados")
+            throw new Error("Erro ao inserir imagem no banco de dados: " + error.message);
         }
     }
 
@@ -25,7 +28,7 @@ class ImagemRepository {
             const imagem = await database('imagem').select("*").where({id:id.id});
             return { imagem }
         } catch (error) {
-            throw new Error("Erro ao buscar a imagens");
+            throw new Error("Erro ao buscar a imagem");
         }
     }
     

@@ -1,11 +1,12 @@
 const AWS = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
+const { v4: uuidv4 } = require('uuid'); 
 
 AWS.config.update({
     region: 'us-east-1',
-    accessKeyId: 'AKIA5RRHCKYZZ7ADAU6V',
-    secretAccessKey: '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'
+    accessKeyId: 'AKIA5RRHCKYZ6W4OB6NB',
+    secretAccessKey: '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'
 });
 
 const s3 = new AWS.S3();
@@ -26,22 +27,24 @@ class AWSRepository {
     }
 
     async enviarImagemParaS3(file) {
-        try {
-            const params = {
-                Bucket: 'bucketmi74',
-                Key: file.originalname,  
-                Body: file.buffer,
-                ContentType: file.mimetype,  
-                ACL: 'public-read'
-            };
+     try {
+         const fileExtension = file.originalname.split('.').pop();
+         const fileName = `${uuidv4()}.${fileExtension}`;
 
-            // Fazendo o upload
-            const data = await s3.upload(params).promise();
-            return { message: 'Imagem enviada com sucesso', data };
-        } catch (error) {
-            throw new Error("Erro ao enviar imagem para o S3: " + error.message);
-        }
-    }
+         const params = {
+             Bucket: 'bucketmi74',
+             Key: fileName,
+             Body: file.buffer,
+             ContentType: file.mimetype 
+         };
+
+         const result = await s3.upload(params).promise();
+         return { url: result.Location, fileName }; 
+     } catch (error) {
+         throw new Error("Erro ao postar imagem no S3: " + error.message);
+     }
+ }
+
 }
 
 module.exports = new AWSRepository();
