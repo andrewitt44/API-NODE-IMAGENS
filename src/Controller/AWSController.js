@@ -1,5 +1,5 @@
 const AWSService = require('../Service/AWSService');
-const ImagemService = require('../Service/ImagemService'); // Importando o serviço de imagem
+const ImagemService = require('../Service/ImagemService');
 
 class AWSController {
     async buscarImagem(req, res) {
@@ -25,7 +25,7 @@ class AWSController {
 
             const resultadoS3 = await AWSService.enviarImagemParaS3(file);
 
-            const { referencia } = req.body;  // Remover título e data de criação
+            const { referencia } = req.body;
             const novaImagem = {
                 referencia: resultadoS3.fileName,  
                 usuario_id: id,  

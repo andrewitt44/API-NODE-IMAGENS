@@ -3,7 +3,7 @@ const ImagemService = require('../Service/ImagemService');
 class ImagemController {
     async novaImagem(req, res) {
         try {
-            const { referencia } = req.body;  // Remover título e data de criação
+            const { referencia } = req.body;
             const resultado = await ImagemService.criarNovaImagem(referencia);
             res.json(resultado);
         } catch (error) {
@@ -33,7 +33,7 @@ class ImagemController {
     async atualizarImagem(req, res) {
         try {
             const { id } = req.params;
-            const { referencia } = req.body;  // Remover título e data de criação
+            const { referencia } = req.body; 
 
             const resultado = await ImagemService.atualizarImagem(id, referencia);
             res.json(resultado);

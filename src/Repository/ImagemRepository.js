@@ -6,7 +6,7 @@ class ImagemRepository {
         try {
             await database('imagem').insert({
                 referencia: imagem.referencia,
-                usuario_id: imagem.usuario_id,  // Remover data de criação
+                usuario_id: imagem.usuario_id,
             });
             return { message: "Imagem criada com sucesso" };
         } catch (error) {

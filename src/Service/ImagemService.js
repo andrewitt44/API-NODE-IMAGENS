@@ -3,7 +3,7 @@ const Imagem = require('../Entity/Imagem');
 
 class ImagemService {
     async criarNovaImagem(imagem) {
-        const novaImagem = new Imagem(imagem.referencia);  // Remover título e data de criação
+        const novaImagem = new Imagem(imagem.referencia);
 
         novaImagem.usuario_id = imagem.usuario_id; 
 
@@ -19,7 +19,7 @@ class ImagemService {
     }
 
     async atualizarImagem(id, referencia) {
-        const dadosAtualizados = { referencia };  // Remover título e data de criação
+        const dadosAtualizados = { referencia };
         return await ImagemRepository.atualizarImagem(id, dadosAtualizados);
     }
 }
