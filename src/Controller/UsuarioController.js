@@ -11,15 +11,6 @@ class UsuarioController {
         }
     }
 
-    async listarUsuario(req, res) {
-        try {
-            const resultado = await UsuarioService.listarUsuario();
-            res.json(resultado);
-        } catch (error) {
-            res.status(400).json({ error: error.message });
-        }
-    }
-
     async buscarUsuario(req , res) {
         try {
             const id = req.params
@@ -30,12 +21,9 @@ class UsuarioController {
         }
     }
     
-    async atualizarUsuario(req, res) {
+    async listarUsuario(req, res) {
         try {
-            const { id } = req.params;
-            const { nome } = req.body;
-
-            const resultado = await UsuarioService.atualizarUsuario(id, nome);
+            const resultado = await UsuarioService.listarUsuario();
             res.json(resultado);
         } catch (error) {
             res.status(400).json({ error: error.message });
@@ -47,6 +35,18 @@ class UsuarioController {
             const { id } = req.params;
 
             const resultado = await UsuarioService.removerUsuario(id);
+            res.json(resultado);
+        } catch (error) {
+            res.status(400).json({ error: error.message });
+        }
+    }
+    
+    async atualizarUsuario(req, res) {
+        try {
+            const { id } = req.params;
+            const { nome } = req.body;
+
+            const resultado = await UsuarioService.atualizarUsuario(id, nome);
             res.json(resultado);
         } catch (error) {
             res.status(400).json({ error: error.message });
